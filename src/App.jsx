@@ -5,7 +5,7 @@ function App() {
 
   // 🔐 LOGIN
   const login = async () => {
-    const res = await fetch("http://localhost:5000/api/auth/login", {
+    const res = await fetch("https://notas-backend-f5ox.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
