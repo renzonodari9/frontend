@@ -3,9 +3,11 @@ import { useState } from "react";
 function App() {
   const [notes, setNotes] = useState([]);
 
+  const API = "https://notas-backend-f5ox.onrender.com";
+
   // 🔐 LOGIN
   const login = async () => {
-    const res = await fetch("https://notas-backend-f5ox.onrender.com", {
+    const res = await fetch(`${API}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -27,7 +29,7 @@ function App() {
   const getNotes = async () => {
     const token = localStorage.getItem("token");
 
-    const res = await fetch("https://notas-backend-f5ox.onrender.com", {
+    const res = await fetch(`${API}/api/notes`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -43,7 +45,7 @@ function App() {
   const createNote = async () => {
     const token = localStorage.getItem("token");
 
-    const res = await fetch("https://notas-backend-f5ox.onrender.com", {
+    const res = await fetch(`${API}/api/notes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +60,6 @@ function App() {
     const data = await res.json();
     console.log("CREADA:", data);
 
-    // 🔄 volver a traer notas
     getNotes();
   };
 
