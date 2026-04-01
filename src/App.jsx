@@ -27,7 +27,7 @@ function App() {
   const getNotes = async () => {
     const token = localStorage.getItem("token");
 
-    const res = await fetch("http://localhost:5000/api/notes", {
+    const res = await fetch("https://notas-backend-f5ox.onrender.com", {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -43,7 +43,7 @@ function App() {
   const createNote = async () => {
     const token = localStorage.getItem("token");
 
-    const res = await fetch("http://localhost:5000/api/notes", {
+    const res = await fetch("https://notas-backend-f5ox.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
