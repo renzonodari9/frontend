@@ -5,6 +5,24 @@ function App() {
 
   const API = "https://notas-backend-f5ox.onrender.com";
 
+  // 🔐 REGISTER
+  const register = async () => {
+    const res = await fetch(`${API}/api/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: "renzonodari9@gmail.com",
+        password: "123456"
+      })
+    });
+
+    const data = await res.json();
+    console.log("REGISTER:", data);
+    alert("Usuario creado");
+  };
+
   // 🔐 LOGIN
   const login = async () => {
     const res = await fetch(`${API}/api/auth/login`, {
@@ -21,8 +39,12 @@ function App() {
     const data = await res.json();
     console.log("LOGIN:", data);
 
-    localStorage.setItem("token", data.token);
-    alert("Login OK");
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      alert("Login OK");
+    } else {
+      alert(data.msg);
+    }
   };
 
   // 📥 OBTENER NOTAS
@@ -67,6 +89,7 @@ function App() {
     <div style={{ padding: "20px" }}>
       <h1>Notas App 🚀</h1>
 
+      <button onClick={register}>Register</button>
       <button onClick={login}>Login</button>
       <button onClick={getNotes}>Ver Notas</button>
       <button onClick={createNote}>Crear Nota</button>
